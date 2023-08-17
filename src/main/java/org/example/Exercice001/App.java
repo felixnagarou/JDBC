@@ -13,6 +13,8 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
+
+        new Menu();
         Scanner scanner = new Scanner(System.in);
         Connection connection = null;
         //Student student = new Student();
@@ -28,11 +30,11 @@ public class App {
             System.out.println("Saisir date obtention diplôme");
             String dateString = scanner.nextLine();
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
-            Date graduationDate;
+            java.util.Date graduationDate = null;
             try {
-                graduationDate = (Date) dateFormat.parse(dateString);
+                graduationDate = dateFormat.parse(dateString);
             } catch (ParseException e) {
-                graduationDate = new Date(01-01-1990);
+                graduationDate = new Date(01-01-1998);
             }
 
             String query = null;

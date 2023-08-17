@@ -10,10 +10,15 @@ import org.example.Exercice001.Student;
 
 public class Menu {
     private static ArrayList<Student> studentList;
+    private static Scanner scanner;
+
+    public Menu(){
+        Scanner scanner = new Scanner(System.in);
+    }
 
 
     public static void afficherMenu() throws SQLException {
-        Scanner scanner = new Scanner(System.in);
+
         int choix;
 
 
