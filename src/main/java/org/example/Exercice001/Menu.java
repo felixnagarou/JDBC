@@ -14,9 +14,7 @@ public class Menu {
 
     public static void afficherMenu() throws SQLException {
         Scanner scanner = new Scanner(System.in);
-        Student student = null;
         int choix;
-
 
 
         do {
@@ -29,13 +27,12 @@ public class Menu {
             System.out.println("0. Quitter");
             System.out.println("Votre choix :");
 
-            choix= scanner.nextInt();
+            choix = scanner.nextInt();
             scanner.nextLine();
 
-            switch (choix) {
-                case 1:
-                    try {
-                        connection = DatabaseManager.getPostGreSQLException();
+            try {
+                    switch (choix) {
+                        case 1:
                         System.out.println("Saisir nom");
                         String name = scanner.nextLine();
                         System.out.println("Saisir prénom");
@@ -50,31 +47,34 @@ public class Menu {
                         try {
                             graduationDate = (Date) dateFormat.parse(dateString);
                         } catch (ParseException e) {
-                            graduationDate = new Date(01-01-1990);
+                            graduationDate = new Date(01 - 01 - 1990);
                         }
-                    student.saveStudent(student.getName(), student.getFirst_name(), student.getClassNumber(), student.getGraduationDate());
-                    break;
-                case 2:
-                    student.getAllStudents();
-                    break;
-                case 3 :
-                    student.deleteStudent();
-                    break;
-                case 4 :
-                    student.getStudentByClass(student.getClassNumber());
-                    break;
-                case 0 :
-                    System.out.println("Bye bye");
-                    break;
-                default:
-                    System.out.println("Choix invalide. Veuillez entrer un choix valide !!!!");
+                        studentList.get().saveStudent();
+                        break;
+                        case 2:
+                            studentList.get().getAllStudents();
+                            break;
+                        case 3:
+                            System.out.println("Entrer l'identifiant de l'étudiant à supprimer de la liste");
+                            int id = scanner.nextInt();
+                            scanner.nextLine();
+                            studentList.get().deleteStudent();
+                            break;
+                        case 4:
+                            studentList.get().getStudentByClass();
+                            break;
+                        case 0:
+                            System.out.println("Bye bye");
+                            break;
+                        default:
+                            System.out.println("Choix invalide. Veuillez entrer un choix valide !!!!");
+
+                    }
+
 
             }
-
-
-        }while (choix != 0);
+        } while (choix != 0) ;
 
         scanner.close();
-
     }
 }

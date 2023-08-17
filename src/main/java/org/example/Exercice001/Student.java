@@ -1,11 +1,8 @@
 package org.example.Exercice001;
 
-import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
+
 
 public class Student {
     private String name;
@@ -13,9 +10,15 @@ public class Student {
 
     private int classNumber;
 
-    private Date graduationDate;
+    private java.util.Date graduationDate;
 
-    private static int studentCount;
+    private static String query;
+
+    private static Connection connection;
+
+    private static  PreparedStatement statement;
+
+
 
     public Student(){
     }
@@ -44,7 +47,7 @@ public class Student {
         this.classNumber = classNumber;
     }
 
-    public Date getGraduationDate() {
+    public java.util.Date getGraduationDate() {
         return graduationDate;
     }
 
@@ -52,31 +55,55 @@ public class Student {
         this.graduationDate = graduationDate;
     }
 
-    public String saveStudent(String name, String first_name, int classNumber, Date graduationDate) throws SQLException {
-        Statement statement = DatabaseManager.getPostGreSQLException().createStatement();
+    public void saveStudent() throws SQLException {
         String query = "INSERT INTO etudiant (name, first_name, classNumber, graduationDate) " +
                 "VALUES ('"+name+"' , '"+first_name+"' , '"+classNumber+"' , '"+graduationDate+"')";
-        return query;
+        Connection connection = DatabaseManager.getPostGreSQLException();
+        statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+        statement.setString(1, getName());
+        statement.setString(2, getFirst_name());
+        statement.setInt(3, getClassNumber());
+        statement.setDate(4, new Date(getGraduationDate().getTime()));
+        int nbRows = statement.executeUpdate();
+        ResultSet resultSet = statement.getGeneratedKeys();
+        if (resultSet.next()){
+            setId(resultSet.getInt(1));
+        }
+
+        //return query;
 
     }
 
-    public ArrayList<Student> getAllStudents() throws SQLException {
+    private void setId(int anInt) {
+    }
+
+    //private void setId(int anInt) {
+    //}
+
+    public static ArrayList<Student> getAllStudents() throws SQLException {
         Statement statement = DatabaseManager.getPostGreSQLException().createStatement();
         ResultSet studentSet = statement.executeQuery("SELECT * FROM etudiant");
+        while (studentSet.next()){
+            Student s = new Student();
+            s.setName(studentSet.getString("name"));
+            s.setFirst_name(studentSet.getString("first_name"));
+            s.setClassNumber(studentSet.getInt("classNumber"));
+            s.setGraduationDate(studentSet.getDate("graduationDate"));
+        }
         ArrayList<Student> allStudents = new ArrayList<>();
         return allStudents;
     }
 
-    public String deleteStudent(int id) throws SQLException {
+    public void deleteStudent(int id) throws SQLException {
         String query = null;
         Statement statement = DatabaseManager.getPostGreSQLException().createStatement();
         query = "DELETE FROM etudiant WHERE id = " + id;
-        return query;
+        //return query;
     }
 
-    public String getStudentByClass(int classNumber) {
+    public ArrayList getStudentByClass(int classNumber) {
         String query = null;
-        return query;
+       // return query;
     }
 
 
