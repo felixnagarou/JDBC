@@ -15,12 +15,13 @@ public class App {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Connection connection = null;
+        Student student = new Student();
         try {
             connection = DatabaseManager.getPostGreSQLException();
             System.out.println("Saisir nom");
             String name = scanner.nextLine();
             System.out.println("Saisir prénom");
-            String firstname = scanner.nextLine();
+            String first_name = scanner.nextLine();
             System.out.println("Saisir numéro classe");
             int classNumber = scanner.nextInt();
             scanner.nextLine();
@@ -33,11 +34,8 @@ public class App {
             } catch (ParseException e) {
                 graduationDate = new Date(01-01-1990);
             }
-            Student student = new Student();
 
-
-            String query = "INSERT INTO etudiant (name, first_name, classNumber, graduationDate) " +
-                    "VALUES ('"+name+"' , '"+firstname+"' , '"+classNumber+"' , '"+graduationDate+"')";
+            String query = null;
 
             Statement statement = connection.createStatement();
             boolean dataCheck = statement.execute(query);

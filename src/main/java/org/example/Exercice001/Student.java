@@ -1,6 +1,9 @@
 package org.example.Exercice001;
 
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -49,13 +52,26 @@ public class Student {
         this.graduationDate = graduationDate;
     }
 
-    public void saveStudent(String name, String first_name, int classNumber, Date graduationDate){
-        Student student = new Student();
+    public String saveStudent(String name, String first_name, int classNumber, Date graduationDate) throws SQLException {
+        Statement statement = DatabaseManager.getPostGreSQLException().createStatement();
+        String query = "INSERT INTO etudiant (name, first_name, classNumber, graduationDate) " +
+                "VALUES ('"+name+"' , '"+first_name+"' , '"+classNumber+"' , '"+graduationDate+"')";
+        return query;
+
     }
 
-    public ArrayList<Student> getAllStudents(){
+    public ArrayList<Student> getAllStudents() throws SQLException {
+        Statement statement = DatabaseManager.getPostGreSQLException().createStatement();
+        ResultSet studentSet = statement.executeQuery("SELECT * FROM etudiant");
         ArrayList<Student> allStudents = new ArrayList<>();
         return allStudents;
+    }
+
+    public String deleteStudent(int id) throws SQLException {
+        String query = null;
+        Statement statement = DatabaseManager.getPostGreSQLException().createStatement();
+        query = "DELETE FROM etudiant WHERE id = " + id;
+        return query;
     }
 
 
