@@ -1,6 +1,8 @@
 package org.example.Exercice001;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Student {
     private String name;
@@ -10,14 +12,9 @@ public class Student {
 
     private Date graduationDate;
 
-    //private static int studentCount;
+    private static int studentCount;
 
-    public Student(String name, String first_name, int classNumber, Date graduationDate){
-        //id = studentCount++;
-        this.name = name;
-        this.first_name = first_name;
-        this.classNumber = classNumber;
-        this.graduationDate = graduationDate;
+    public Student(){
     }
 
     public String getName() {
@@ -51,6 +48,17 @@ public class Student {
     public void setGraduationDate(Date graduationDate) {
         this.graduationDate = graduationDate;
     }
+
+    public void saveStudent(String name, String first_name, int classNumber, Date graduationDate){
+        Student student = new Student();
+    }
+
+    public ArrayList<Student> getAllStudents(){
+        ArrayList<Student> allStudents = new ArrayList<>();
+        return allStudents;
+    }
+
+
 
 
 }

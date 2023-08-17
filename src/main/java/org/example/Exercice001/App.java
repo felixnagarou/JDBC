@@ -19,24 +19,21 @@ public class App {
             connection = DatabaseManager.getPostGreSQLException();
             System.out.println("Saisir nom");
             String name = scanner.nextLine();
-            scanner.nextLine();
             System.out.println("Saisir prénom");
             String firstname = scanner.nextLine();
-            scanner.nextLine();
             System.out.println("Saisir numéro classe");
             int classNumber = scanner.nextInt();
             scanner.nextLine();
             System.out.println("Saisir date obtention diplôme");
             String dateString = scanner.nextLine();
-            scanner.nextLine();
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
             Date graduationDate;
             try {
                 graduationDate = (Date) dateFormat.parse(dateString);
             } catch (ParseException e) {
-                graduationDate = new Date(01-01-1998);
+                graduationDate = new Date(01-01-1990);
             }
-            Student student = new Student(name, firstname, classNumber, graduationDate);
+            Student student = new Student();
 
 
             String query = "INSERT INTO etudiant (name, first_name, classNumber, graduationDate) " +
