@@ -1,15 +1,20 @@
 package org.example.Exercice001;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import org.example.Exercice001.Student;
 
 public class Menu {
+    private static ArrayList<Student> studentList;
 
 
-    public static void afficherMenu(){
+    public static void afficherMenu() throws SQLException {
         Scanner scanner = new Scanner(System.in);
-        public static Student student;
+        Student student = null;
         int choix;
+
+
 
         do {
             System.out.println("=== Menu principal ===");
@@ -26,16 +31,16 @@ public class Menu {
 
             switch (choix) {
                 case 1:
-                    saveStudent();
+                    student.saveStudent();
                     break;
                 case 2:
-                    getAllStudents();
+                    student.getAllStudents();
                     break;
                 case 3 :
-                    deleteStudent();
+                    student.deleteStudent();
                     break;
                 case 4 :
-                    ajoutReservation();
+                    student.getStudentByClass();
                     break;
                 case 0 :
                     System.out.println("Bye bye");

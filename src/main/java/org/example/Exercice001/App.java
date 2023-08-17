@@ -15,7 +15,7 @@ public class App {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Connection connection = null;
-        Student student = new Student();
+        //Student student = new Student();
         try {
             connection = DatabaseManager.getPostGreSQLException();
             System.out.println("Saisir nom");

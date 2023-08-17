@@ -74,6 +74,11 @@ public class Student {
         return query;
     }
 
+    public String getStudentByClass(int classNumber) {
+        String query = null;
+        return query;
+    }
+
 
 
 
