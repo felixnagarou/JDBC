@@ -1,6 +1,9 @@
 package org.example.Exercice001;
 
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 import org.example.Exercice001.Student;
@@ -31,7 +34,25 @@ public class Menu {
 
             switch (choix) {
                 case 1:
-                    student.saveStudent();
+                    try {
+                        connection = DatabaseManager.getPostGreSQLException();
+                        System.out.println("Saisir nom");
+                        String name = scanner.nextLine();
+                        System.out.println("Saisir prénom");
+                        String first_name = scanner.nextLine();
+                        System.out.println("Saisir numéro classe");
+                        int classNumber = scanner.nextInt();
+                        scanner.nextLine();
+                        System.out.println("Saisir date obtention diplôme");
+                        String dateString = scanner.nextLine();
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
+                        Date graduationDate;
+                        try {
+                            graduationDate = (Date) dateFormat.parse(dateString);
+                        } catch (ParseException e) {
+                            graduationDate = new Date(01-01-1990);
+                        }
+                    student.saveStudent(student.getName(), student.getFirst_name(), student.getClassNumber(), student.getGraduationDate());
                     break;
                 case 2:
                     student.getAllStudents();
@@ -40,7 +61,7 @@ public class Menu {
                     student.deleteStudent();
                     break;
                 case 4 :
-                    student.getStudentByClass();
+                    student.getStudentByClass(student.getClassNumber());
                     break;
                 case 0 :
                     System.out.println("Bye bye");
