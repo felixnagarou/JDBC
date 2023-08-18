@@ -3,23 +3,26 @@ package Exercice002.Model;
 import java.util.HashMap;
 
 public class CompteBancaire {
-    private HashMap<Integer, Client> clientList;
+
+    private int accountId;
+    //private HashMap<Integer, Client> clientList;
     private double solde;
+
+    private int clientId;
     private HashMap<Integer, Operation> operationList;
 
-    public CompteBancaire(HashMap<Integer, Client> clientList, double solde, HashMap<Integer, Operation> operationList) {
-        this.clientList = clientList;
-        this.solde = solde;
+    public CompteBancaire(int accountId, HashMap<Integer, Operation> operationList, int clientId) {
+        this.accountId = accountId;
         this.operationList = operationList;
+        this.clientId = clientId;
     }
 
-    public HashMap<Integer, Client> getClientList() {
-        return clientList;
+    public  CompteBancaire(int accountId, double solde, int clientId){
+        this.accountId = accountId;
+        this.solde = solde;
+        this.clientId = clientId;
     }
 
-    public void setClientList(HashMap<Integer, Client> clientList) {
-        this.clientList = clientList;
-    }
 
     public double getSolde() {
         return solde;
@@ -36,4 +39,12 @@ public class CompteBancaire {
     public void setOperationList(HashMap<Integer, Operation> operationList) {
         this.operationList = operationList;
     }
+
+    public int getAccountId(){ return accountId;}
+
+    public void setAccountId(int accountId){this.accountId = accountId;}
+
+    public int getClientId(){ return  clientId ;}
+
+    public void setClientId(){this.clientId = clientId;}
 }
