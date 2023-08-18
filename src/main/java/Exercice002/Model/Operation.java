@@ -26,4 +26,8 @@ public class Operation {
     public void setAmount(double amount) {
         this.amount = amount;
     }
+
+    public boolean getStatus(){return status;}
+
+    public void setStatus(){this.status = status;}
 }
