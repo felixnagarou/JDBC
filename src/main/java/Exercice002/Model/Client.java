@@ -15,6 +15,11 @@ public class Client {
         this.accountList = accountList;
     }
 
+    public Client(String firstName, String lastName){
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public String getLastName() {
         return lastName;
     }

@@ -4,6 +4,7 @@ import Exercice002.Model.CompteBancaire;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 public class compteDAO extends BaseDAO<CompteBancaire>{
@@ -14,7 +15,16 @@ public class compteDAO extends BaseDAO<CompteBancaire>{
 
     @Override
     public boolean save(CompteBancaire element) throws SQLException {
-        return false;
+        query = "INSERT into account (solde, clientId) VALUES ( ?, ?)";
+        statement = _connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+        statement.setDouble(1, element.getAmount());
+        statement.setBoolean(2, element.getStatus());
+        int nbRows = statement.executeUpdate();
+        resultSet = statement.getGeneratedKeys();
+        if(resultSet.next()){
+            element.setNumber(resultSet.getInt(1));
+        }
+        return nbRows == 1;
     }
 
     @Override
