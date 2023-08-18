@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class compteDAO extends BaseDAO<CompteBancaire>{
@@ -82,6 +83,13 @@ public class compteDAO extends BaseDAO<CompteBancaire>{
     public CompteBancaire getAccountOperations() throws SQLException {
         CompteBancaire accountHistory = null;
         query = "SELECT * from operation JOIN account on operation.operationId = account.operationId  WHERE accountId = ?";
+        statement = _connection.prepareStatement(query);
+        resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            accountHistory.setOperationList(resultSet.getInt("operationId"),
+                    resultSet.getRow();
+            accountHistory.getOperationList().put();
+        }
 
         return accountHistory;
     }
