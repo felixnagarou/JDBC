@@ -3,14 +3,12 @@ package Exercice002.Model;
 public class Operation {
     private int number;
     private double amount;
-    private enum status{
-        DEPOSIT,
-        WITHDRAW
-    }
+    private boolean status;
 
-    public Operation(int number, double amount) {
+    public Operation(int number, double amount, boolean status, int accountId) {
         this.number = number;
         this.amount = amount;
+        this.status = status;
     }
 
     public int getNumber() {

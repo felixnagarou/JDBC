@@ -20,20 +20,37 @@ public class operationDAO extends BaseDAO<Operation> {
     public boolean update(Operation element) throws SQLException {
         query = "UPDATE operation SET amount = ? WHERE id = ?";
         statement = _connection.prepareStatement(query);
-        statement.setDouble(_connection.prepareStatement(1, ))
-
-
-        return false;
+        statement.setDouble(1, element.getAmount());
+        statement.setInt(2, element.getNumber());
+        int nbRow = statement.executeUpdate();
+        return nbRow ==1;
     }
 
     @Override
     public boolean delete(Operation element) throws SQLException {
-        return false;
+        query = "DELETE FROM operation where id = ?";
+        statement = _connection.prepareStatement(query);
+        statement.setInt(1, element.getNumber());
+        int nbRow = statement.executeUpdate();
+        return nbRow ==1;
     }
 
     @Override
     public Operation get(int id) throws SQLException {
-        return null;
+        Operation operation = null;
+        query = "SELECT FROM operation where id = ?";
+        statement = _connection.prepareStatement(query);
+        statement.setInt(1, id);
+        resultSet = statement.executeQuery();
+        if(resultSet.next()){
+            operation = new Operation(resultSet.getInt("operationId"),
+                    resultSet.getFloat("amount"),
+                    resultSet.getBoolean("status"),
+                    resultSet.getInt("accountId"));
+
+        }
+
+        return operation;
     }
 
     @Override
