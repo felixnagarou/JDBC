@@ -6,10 +6,11 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-public class operationDAO extends BaseDAO<Operation> {
-    protected operationDAO(Connection connection) {
+public class OperationDAO extends BaseDAO<Operation> {
+    public OperationDAO(Connection connection) {
         super(connection);
     }
 
@@ -78,5 +79,23 @@ public class operationDAO extends BaseDAO<Operation> {
         }
         return result;
     }
+
+
+    public HashMap<Integer, Operation> getAccountHistory() throws SQLException { //Obtenir l'historique des transactions pour un compte bancaire
+        HashMap<Integer, Operation> history = new HashMap<>();
+        query = "SELECT * from operation WHERE accountId = ?";
+        statement = _connection.prepareStatement(query);
+        resultSet = statement.executeQuery();
+        while (resultSet.next()){
+            Operation operation = new Operation(resultSet.getInt("operationId"),
+                    resultSet.getFloat("amount"),
+                    resultSet.getBoolean("status"),
+                    resultSet.getInt("accountId"));
+            history.put(operation.getNumber(), operation);
+        }
+        return history;
+    }
+
+
 
 }

@@ -11,10 +11,8 @@ public class CompteBancaire {
     private int clientId;
     private HashMap<Integer, Operation> operationList;
 
-    public CompteBancaire(int accountId, HashMap<Integer, Operation> operationList, int clientId) {
-        this.accountId = accountId;
+    public CompteBancaire(HashMap<Integer, Operation> operationList) {
         this.operationList = operationList;
-        this.clientId = clientId;
     }
 
     public  CompteBancaire(int accountId, double solde, int clientId){

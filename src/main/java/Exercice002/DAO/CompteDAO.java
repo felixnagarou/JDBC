@@ -2,18 +2,16 @@ package Exercice002.DAO;
 
 import Exercice002.Model.Client;
 import Exercice002.Model.CompteBancaire;
-import Exercice002.Model.Operation;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-public class compteDAO extends BaseDAO<CompteBancaire>{
+public class CompteDAO extends BaseDAO<CompteBancaire>{
 
-    protected compteDAO(Connection connection) {
+    public CompteDAO(Connection connection) {
         super(connection);
     }
 
@@ -80,18 +78,11 @@ public class compteDAO extends BaseDAO<CompteBancaire>{
         return result;
     }
 
-    public CompteBancaire getAccountOperations() throws SQLException {
-        CompteBancaire accountHistory = null;
-        query = "SELECT * from operation JOIN account on operation.operationId = account.operationId  WHERE accountId = ?";
-        statement = _connection.prepareStatement(query);
-        resultSet = statement.executeQuery();
-        while (resultSet.next()) {
-            accountHistory.setOperationList(resultSet.getInt("operationId"),
-                    resultSet.getRow();
-            accountHistory.getOperationList().put();
-        }
-
-        return accountHistory;
+    public CompteBancaire getHistory(int id) throws  SQLException {
+        OperationDAO operationLink = new OperationDAO(_connection);
+        CompteBancaire account = new CompteBancaire(operationLink.getAccountHistory());
+         return account;
     }
+
 
 }

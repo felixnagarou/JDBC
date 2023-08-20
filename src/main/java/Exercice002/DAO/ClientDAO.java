@@ -1,7 +1,6 @@
 package Exercice002.DAO;
 
 import Exercice002.Model.Client;
-import Exercice002.Model.Operation;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -9,8 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class clientDAO extends BaseDAO<Client> {
-    protected clientDAO(Connection connection) {
+public class ClientDAO extends BaseDAO<Client> {
+    public ClientDAO(Connection connection) {
         super(connection);
     }
 
